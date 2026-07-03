@@ -1,0 +1,14 @@
+# Python 运行缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyInstaller 打包产物
+build/
+dist/
+*.spec
+
+# 系统临时文件
+Thumbs.db
+.DS_Store
