@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="0.5" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#db2777"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="300" rx="18" fill="url(#bg)"/>
+
+  <!-- decorative dots -->
+  <circle cx="90" cy="60" r="3" fill="#ffffff" opacity="0.25"/>
+  <circle cx="1120" cy="80" r="4" fill="#ffffff" opacity="0.2"/>
+  <circle cx="1060" cy="230" r="3" fill="#ffffff" opacity="0.25"/>
+  <circle cx="180" cy="250" r="4" fill="#ffffff" opacity="0.18"/>
+
+  <!-- main title -->
+  <text x="72" y="118" fill="#ffffff" font-size="52" font-weight="700">番剧批量重命名工具</text>
+  <text x="74" y="168" fill="#fbcfe8" font-size="22" font-weight="500">一键适配 Emby 刮削命名规范 · 标题 - SxxExx - 发布组</text>
+
+  <!-- feature pills -->
+  <g font-size="16" fill="#ffffff">
+    <rect x="74" y="200" width="150" height="40" rx="20" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.3"/>
+    <text x="149" y="226" text-anchor="middle">递归扫描</text>
+    <rect x="238" y="200" width="150" height="40" rx="20" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.3"/>
+    <text x="313" y="226" text-anchor="middle">预览确认</text>
+    <rect x="402" y="200" width="150" height="40" rx="20" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.3"/>
+    <text x="477" y="226" text-anchor="middle">零依赖</text>
+    <rect x="566" y="200" width="180" height="40" rx="20" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.3"/>
+    <text x="656" y="226" text-anchor="middle">视频字幕同步</text>
+  </g>
+
+  <!-- right: file rename mock -->
+  <g transform="translate(810, 70)">
+    <rect width="320" height="160" rx="14" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.35"/>
+    <rect x="26" y="30" width="268" height="34" rx="8" fill="#450a0a" opacity="0.55"/>
+    <text x="40" y="53" fill="#fecaca" font-size="15" font-family="Consolas,monospace">[组] 番剧名 [03] [1080p].mkv</text>
+    <path d="M40 78 h14 m-5 -5 l5 5 l-5 5" stroke="#fde68a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <rect x="26" y="94" width="268" height="34" rx="8" fill="#052e16" opacity="0.6"/>
+    <text x="40" y="117" fill="#bbf7d0" font-size="15" font-family="Consolas,monospace">番剧名 - S01E03 - 组.mkv</text>
+    <text x="160" y="148" fill="#e9d5ff" font-size="12" text-anchor="middle" font-family="Consolas,monospace">Ready for Emby Scrape ✓</text>
+  </g>
+</svg>
