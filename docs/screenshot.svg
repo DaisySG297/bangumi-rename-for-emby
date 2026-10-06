@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="586" viewBox="0 0 880 586" font-family="'Cascadia Code','JetBrains Mono','Sarasa Mono SC',Consolas,monospace">
+  <rect width="880" height="586" rx="12" fill="#1e1e2e"/>
+  <path d="M0 12 Q0 0 12 0 H868 Q880 0 880 12 V40 H0 Z" fill="#181825"/>
+  <rect y="40" width="880" height="1" fill="#313244"/>
+  <circle cx="20" cy="20" r="6" fill="#f38ba8"/><circle cx="40" cy="20" r="6" fill="#f9e2af"/><circle cx="60" cy="20" r="6" fill="#a6e3a1"/>
+  <text x="440.0" y="24" fill="#a6adc8" font-size="12" text-anchor="middle">bangumi_rename.py — 预览模式</text>
+<line x1="24" y1="64.75" x2="856" y2="64.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="92.5" fill="#89b4fa" font-size="13.5">共找到 6 个可重命名的文件，预览结果：</text>
+<line x1="24" y1="106.75" x2="856" y2="106.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="134.5" fill="#f38ba8" font-size="13.5">[BeanSub][Tensei Shitara Slime Datta Ken S4][02_74][CHT][1080P].mkv</text>
+<text x="24" y="155.5" fill="#a6e3a1" font-size="13.5">→ Tensei Shitara Slime Datta Ken - S04E02 - BeanSub.mkv</text>
+<line x1="24" y1="169.75" x2="856" y2="169.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="197.5" fill="#f38ba8" font-size="13.5">[Nix-Raws] Reiwa no Dara-san S01E01 [CR WEB-DL 1080p][SC_TC].mp4</text>
+<text x="24" y="218.5" fill="#a6e3a1" font-size="13.5">→ Reiwa no Dara-san - S01E01 - Nix-Raws.mp4</text>
+<line x1="24" y1="232.75" x2="856" y2="232.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="260.5" fill="#f38ba8" font-size="13.5">[orion origin] Yuusha no Kuzu [01] [1080p] [H265 AAC] [CHT_JPN].mp4</text>
+<text x="24" y="281.5" fill="#a6e3a1" font-size="13.5">→ Yuusha no Kuzu - S01E01 - orion origin.mp4</text>
+<line x1="24" y1="295.75" x2="856" y2="295.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="323.5" fill="#f38ba8" font-size="13.5">[字幕组] 番剧名 - 05v2 [1080p][简繁内嵌].mp4</text>
+<text x="24" y="344.5" fill="#a6e3a1" font-size="13.5">→ 番剧名 - S01E05 - 字幕组.mp4</text>
+<line x1="24" y1="358.75" x2="856" y2="358.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="386.5" fill="#f38ba8" font-size="13.5">S1/[LoliHouse] Kodoku no Gurume [03] [WebRip 1080p HEVC-10bit AAC ASSx2].mkv</text>
+<text x="24" y="407.5" fill="#a6e3a1" font-size="13.5">→ S1/Kodoku no Gurume - S01E03 - LoliHouse.mkv</text>
+<line x1="24" y1="421.75" x2="856" y2="421.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="449.5" fill="#f38ba8" font-size="13.5">S1/[LoliHouse] Kodoku no Gurume [03].ass</text>
+<text x="24" y="470.5" fill="#a6e3a1" font-size="13.5">→ S1/Kodoku no Gurume - S01E03 - LoliHouse.ass</text>
+<line x1="24" y1="484.75" x2="856" y2="484.75" stroke="#45475a" stroke-width="1"/>
+<text x="24" y="512.5" fill="#cdd6f4" font-size="13.5"></text>
+<text x="24" y="533.5" fill="#fab387" font-size="13.5">确认执行全部重命名？输入 y 确认，其他字符取消：</text>
+<text x="24" y="554.5" fill="#94e2d5" font-size="13.5">已取消重命名操作。</text>
+</svg>
