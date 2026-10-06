@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="240" viewBox="0 0 1180 240" font-family="'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#a78bfa"/>
+    </marker>
+  </defs>
+  <rect width="1180" height="240" rx="16" fill="#faf5ff"/>
+
+  <!-- step boxes -->
+  <g font-size="17" font-weight="600" text-anchor="middle">
+    <g>
+      <rect x="30" y="60" width="180" height="110" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+      <text x="120" y="100" font-size="30">📥</text>
+      <text x="120" y="132" fill="#4c1d95">放入脚本</text>
+      <text x="120" y="155" fill="#7c6ba8" font-size="12.5" font-weight="400">放进番剧根目录</text>
+    </g>
+    <g>
+      <rect x="260" y="60" width="180" height="110" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+      <text x="350" y="100" font-size="30">🔍</text>
+      <text x="350" y="132" fill="#4c1d95">递归扫描</text>
+      <text x="350" y="155" fill="#7c6ba8" font-size="12.5" font-weight="400">遍历所有子文件夹</text>
+    </g>
+    <g>
+      <rect x="490" y="60" width="180" height="110" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+      <text x="580" y="100" font-size="30">🧩</text>
+      <text x="580" y="132" fill="#4c1d95">智能解析</text>
+      <text x="580" y="155" fill="#7c6ba8" font-size="12.5" font-weight="400">识别标题/集数/发布组</text>
+    </g>
+    <g>
+      <rect x="720" y="60" width="180" height="110" rx="14" fill="#ffffff" stroke="#f0abfc" stroke-width="2"/>
+      <text x="810" y="100" font-size="30">👁️</text>
+      <text x="810" y="132" fill="#701a75">预览确认</text>
+      <text x="810" y="155" fill="#a15aa8" font-size="12.5" font-weight="400">列出变更 · 二次确认</text>
+    </g>
+    <g>
+      <rect x="950" y="60" width="180" height="110" rx="14" fill="#4c1d95"/>
+      <text x="1040" y="100" font-size="30">✅</text>
+      <text x="1040" y="132" fill="#ffffff">批量重命名</text>
+      <text x="1040" y="155" fill="#d8b4fe" font-size="12.5" font-weight="400">冲突跳过 · 不覆盖</text>
+    </g>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#a78bfa" stroke-width="2.5" fill="none">
+    <line x1="212" y1="115" x2="254" y2="115" marker-end="url(#arr)"/>
+    <line x1="442" y1="115" x2="484" y2="115" marker-end="url(#arr)"/>
+    <line x1="672" y1="115" x2="714" y2="115" marker-end="url(#arr)"/>
+    <line x1="902" y1="115" x2="944" y2="115" marker-end="url(#arr)"/>
+  </g>
+
+  <text x="590" y="222" text-anchor="middle" fill="#8b5cf6" font-size="13">识别失败或临时文件（.part / .cfg 等）将自动跳过，重名文件不覆盖</text>
+</svg>
