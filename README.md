@@ -19,13 +19,20 @@
 
 ## ⬇️ 下载即用（Windows）
 
-不想装 Python？直接拿走打包好的单文件 exe，双击就能跑：
+不想装 Python？直接拿走打包好的单文件 exe，双击就能跑，**命令行版 / 图形界面版各一个**：
 
-**[⬇️ 前往 Releases 下载](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)**（`bangumi-rename-v1.1.exe`，单文件约 6.9 MB）
+**[⬇️ 前往 Releases 下载](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)**
 
-仓库内同时留档：[`release/v1.1/`](release/v1.1/) ｜ 版本改动详见 [更新记录](CHANGELOG.md)
+| 资产（Releases 页） | 对应版本 | 大小 | 适合场景 |
+|---------------------|---------|------|---------|
+| `bangumi-rename-v1.1.exe` | 命令行版 | 约 6.9 MB | 只想快速改一遍，或塞进 qBittorrent / 脚本自动化链路 |
+| `bangumi-rename-v1.1-gui.exe` | **图形界面版** | 约 10.0 MB | 想要可视化预览、逐条勾选、右键修正、一键撤销 |
 
-仓库同时提供**图形界面版**源码 [`bangumi_rename_gui.py`](bangumi_rename_gui.py)（`python bangumi_rename_gui.py` 直接运行，或自行打包，见 [图形界面版](#-图形界面版)）。
+> GitHub 不支持非 ASCII 资产名，故 Releases 上的资产名是 ASCII；仓库内留档用中文名，**内容完全相同**。
+
+仓库内同时留档：[`release/v1.1/`](release/v1.1/)（`番剧批量重命名(字幕版).exe` + `番剧批量重命名(界面版).exe` + [更新说明](release/v1.1/%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E.md)）｜ 版本改动详见 [更新记录](CHANGELOG.md)
+
+两版的界面源码亦在仓库中：[`bangumi_rename_gui.py`](bangumi_rename_gui.py)（`python bangumi_rename_gui.py` 直接运行，或自行打包，见 [图形界面版](#-图形界面版)）。
 
 ## ✨ 功能特性
 
@@ -35,7 +42,7 @@
 - 🛡️ **重名保护** — 自动检测目标文件名冲突，跳过重复文件，防止覆盖
 - 📝 **字幕同步** — 支持常见字幕格式同步重命名，保持视频与字幕文件名一致
 - 🪶 **轻量无依赖** — 仅使用 Python 标准库，无需安装额外第三方包
-- 🖼️ **图形界面可选** — 附带 tkinter 可视化界面 `bangumi_rename_gui.py`，与命令行版共用同一套解析与输出逻辑
+- 🖼️ **图形界面可选** — 附带 tkinter 可视化界面 `bangumi_rename_gui.py`，与命令行版共用同一套解析与输出逻辑，并已打包为免安装 EXE 供直接下载
 - 🚀 **可打包分发** — 可打包为独立 EXE 文件，在无 Python 环境的电脑上直接运行
 
 ## 🖥️ 运行效果
@@ -145,6 +152,12 @@ python tests/test_extract_info.py
 
 ### 启动方式
 
+**方式一：直接用打包好的 EXE（Windows，免装 Python）**
+
+从 [Releases](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest) 取下 `bangumi-rename-v1.1-gui.exe`（即仓库内的 `release/v1.1/番剧批量重命名(界面版).exe`），双击即可，**不会弹出控制台黑框**。
+
+**方式二：从源码运行**
+
 ```bash
 python bangumi_rename_gui.py
 ```
@@ -206,6 +219,7 @@ python bangumi_rename_gui.py
 ```
 bangumi_rename.py        命令行版 + 核心解析逻辑（extract_info / build_filename）
 bangumi_rename_gui.py    图形界面版（引擎层 + tkinter 界面层 + 自绘组件）
+release/v1.1/            发布留档：命令行版 EXE + 界面版 EXE + 更新说明（含 SHA256）
 tests/test_extract_info.py  解析引擎测试：五类命名格式 + 反例
 tests/test_engine.py     引擎层端到端测试：扫描 / 执行 / 撤销 / 幂等性
 tests/test_gui.py        界面层冒烟测试：控件构建、视觉元素与全链路交互
@@ -240,11 +254,13 @@ pyinstaller --onefile --name "番剧批量重命名(字幕版)" bangumi_rename.p
 
 ### 打包图形界面版
 
+> 不想自己打包？v1.1 已随版本发布打包好的 `番剧批量重命名(界面版).exe`，见 [`release/v1.1/`](release/v1.1/) 或 [Releases](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)。
+
 **必须使用自带 tkinter 的 Python**（若报 `No module named 'tkinter'`，说明该解释器未编译 GUI 组件，无法打包出可用的界面程序）：
 
 ```bash
 python -m PyInstaller --noconfirm --clean --onefile --windowed ^
-  --name "番剧批量重命名-界面版" ^
+  --name "番剧批量重命名(界面版)" ^
   --hidden-import bangumi_rename ^
   bangumi_rename_gui.py
 ```
@@ -262,12 +278,15 @@ python -m PyInstaller --noconfirm --clean --onefile --windowed ^
 **验证打包结果**：程序内置无界面自检，可在不打开窗口的情况下验证打包是否完好：
 
 ```bash
-dist\番剧批量重命名-界面版.exe --selftest report.txt
+dist\番剧批量重命名(界面版).exe --selftest report.txt
 ```
 
 自检会在临时目录完整跑一遍「扫描 → 重命名 → 撤销」，把逐项结果写入
 `report.txt`（`--windowed` 打包后没有控制台，因此结果以文件形式输出），
 进程退出码 `0` 表示全部通过。
+
+v1.1 发布前已用该方式验证过：核心解析 4 例全部符合预期、执行重命名 4/4 成功、
+撤销还原 4/4 成功、退出码 `0`。
 
 ## ⚠️ 注意事项
 
@@ -283,7 +302,7 @@ dist\番剧批量重命名-界面版.exe --selftest report.txt
 
 | 版本 | 更新内容 |
 |------|---------|
-| v1.1 | **支持外站英文点分（scene）发布名** —— `标题.S01E02.1080p.WEB-DL.DUAL.AAC2.0.H.264.MSubs-发布组.ext` 由「无法识别」变为可直接重命名：只认点分隔的 `SxxExx` / `Exx` 段（不认纯数字，避免把 264 / 1080 当集号）、末段技法前缀自动剥离、无发布组时省略末段；含中日文/全角/空格的名字仍走原有路径。同时抽出 `build_filename` 统一输出拼接，新增解析引擎测试 `tests/test_extract_info.py`；并修掉「工作区混有无法识别文件时打印 `⚠️` 致 GBK 崩溃、确认后一个文件都没改」的问题。**首次提供图形界面版** `bangumi_rename_gui.py`（含三份界面/引擎/布局测试） |
+| v1.1 | **支持外站英文点分（scene）发布名** —— `标题.S01E02.1080p.WEB-DL.DUAL.AAC2.0.H.264.MSubs-发布组.ext` 由「无法识别」变为可直接重命名：只认点分隔的 `SxxExx` / `Exx` 段（不认纯数字，避免把 264 / 1080 当集号）、末段技法前缀自动剥离、无发布组时省略末段；含中日文/全角/空格的名字仍走原有路径。同时抽出 `build_filename` 统一输出拼接，新增解析引擎测试 `tests/test_extract_info.py`；并修掉「工作区混有无法识别文件时打印 `⚠️` 致 GBK 崩溃、确认后一个文件都没改」的问题。**首次提供图形界面版** `bangumi_rename_gui.py`（含三份界面/引擎/布局测试），并随版本发布打包好的免安装 EXE `番剧批量重命名(界面版).exe` |
 | v1.0 | 首个版本 —— 方括号集数 / 横杠集数 / SxxExx 三类命名，递归遍历、预览确认、重名保护、字幕同步、可打包 EXE |
 
 ## 🙏 鸣谢

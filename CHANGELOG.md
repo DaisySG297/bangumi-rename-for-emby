@@ -2,8 +2,9 @@
 
 ## v1.1 — 2026-10-10
 
-> 下载：[⬇️ Releases 页面](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)（`bangumi-rename-v1.1.exe`）
-> ｜ 仓库留档：[`release/v1.1/番剧批量重命名(字幕版).exe`](release/v1.1/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E5%AD%97%E5%B9%95%E7%89%88).exe)
+> 下载：[⬇️ Releases 页面](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)
+> ｜ 命令行版 `bangumi-rename-v1.1.exe` ｜ 图形界面版 `bangumi-rename-v1.1-gui.exe`
+> ｜ 仓库留档：[`release/v1.1/番剧批量重命名(字幕版).exe`](release/v1.1/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E5%AD%97%E5%B9%95%E7%89%88).exe)、[`release/v1.1/番剧批量重命名(界面版).exe`](release/v1.1/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E7%95%8C%E9%9D%A2%E7%89%88).exe)
 
 ### 修复 1：外站英文点分（scene）发布名无法识别
 
@@ -57,14 +58,26 @@ UnicodeEncodeError: 'gbk' codec can't encode character '\u26a0'
 - 自带三份测试：`tests/test_engine.py`（引擎层：扫描 / 执行 / 撤销 / 幂等）、`tests/test_gui.py`（界面层冒烟）、`tests/test_layout.py`（布局几何审计，无桌面环境也能捕捉裁切/溢出回归）。
 - 可打包为 `--windowed` 单文件 EXE，并支持 `--selftest report.txt` 无界面自检。
 
+**随版本一并发布打包好的界面版 EXE**（`番剧批量重命名(界面版).exe`，10,539,704 字节 / SHA256 `821ade5980fef4b936ef7c4472acb7ceea1f2fe477d93d0e9e4bb5ccd0374e30`），打包命令：
+
+```bash
+python -m PyInstaller --noconfirm --clean --onefile --windowed ^
+  --name "番剧批量重命名(界面版)" --hidden-import bangumi_rename bangumi_rename_gui.py
+```
+
+为什么单独打一个界面版 EXE：界面依赖 tkinter，而默认安装的 Python 不一定带 GUI 组件（`No module named 'tkinter'`），非技术用户也没必要为此装 Python。多出来的约 3 MB 全是 tcl/tk 运行时。
+
 ### 验证
 
 - `python tests/test_extract_info.py` → 24/24 通过。
 - `python tests/test_engine.py` / `tests/test_gui.py` / `tests/test_layout.py` → 全部通过（界面与布局测试会临时屏蔽弹窗，可无人值守运行）。
-- 打包后的 EXE 真机实测（stdout 为管道、未设 `PYTHONIOENCODING`，与自动化环境一致）：
+- 打包后的命令行版 EXE 真机实测（stdout 为管道、未设 `PYTHONIOENCODING`，与自动化环境一致）：
   - 点分名 → `Now That I Can Control Reality With A Mouse Cursor Im Gonna Click Away On The Girls - S01E01 - ToonsHub.mkv` ✅
   - 同目录再放一个 `random_video.mp4`（不可识别）→ 程序正常跑完，打印 `[!] 跳过无法识别的文件：2 个`，改名成功 ✅
   - 原有 `[组] 标题 - S01E02`、`[组] 标题 [01]` 形态输出与旧版完全一致，无回归 ✅
+- 打包后的界面版 EXE：
+  - `--selftest report.txt` → 逐项 `[PASS]`、退出码 `0`、结论「自检结果：全部通过」（解析 4 例、重命名 4/4、撤销还原 4/4、`rename_history/` 落盘于 EXE 所在目录）✅
+  - 双击启动实测：进程正常常驻、无控制台黑框、无异常退出 ✅
 
 ### 兼容性
 
