@@ -2,7 +2,8 @@
 
 ## v1.1 — 2026-10-10
 
-> 下载：[`release/v1.1/番剧批量重命名(字幕版).exe`](release/v1.1/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E5%AD%97%E5%B9%95%E7%89%88).exe)
+> 下载：[⬇️ Releases 页面](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)（`bangumi-rename-v1.1.exe`）
+> ｜ 仓库留档：[`release/v1.1/番剧批量重命名(字幕版).exe`](release/v1.1/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E5%AD%97%E5%B9%95%E7%89%88).exe)
 
 ### 修复 1：外站英文点分（scene）发布名无法识别
 

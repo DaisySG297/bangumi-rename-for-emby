@@ -21,7 +21,9 @@
 
 不想装 Python？直接拿走打包好的单文件 exe，双击就能跑：
 
-**[`release/v1.1/番剧批量重命名(字幕版).exe`](release/v1.1/)** ｜ 版本改动详见 [更新记录](CHANGELOG.md)
+**[⬇️ 前往 Releases 下载](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)**（`bangumi-rename-v1.1.exe`，单文件约 6.9 MB）
+
+仓库内同时留档：[`release/v1.1/`](release/v1.1/) ｜ 版本改动详见 [更新记录](CHANGELOG.md)
 
 仓库同时提供**图形界面版**源码 [`bangumi_rename_gui.py`](bangumi_rename_gui.py)（`python bangumi_rename_gui.py` 直接运行，或自行打包，见 [图形界面版](#-图形界面版)）。
 
