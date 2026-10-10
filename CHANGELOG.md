@@ -47,9 +47,19 @@ UnicodeEncodeError: 'gbk' codec can't encode character '\u26a0'
 - 抽出 `build_filename()` 统一拼接输出文件名（原来在 `batch_rename_videos()` 里硬拼字符串），便于单元测试与复用。
 - 新增 `tests/test_extract_info.py`：24 项断言，覆盖五类命名格式，以及「点分但无集号」「无方括号无点分」等**不应被误吞**的反例。
 
+### 首次提供图形界面版
+
+随本版一并开源图形界面 `bangumi_rename_gui.py`（tkinter，纯标准库自绘）：
+
+- **共用同一套引擎**：直接 `import bangumi_rename` 复用 `extract_info()`；本版又把输出拼接也统一到 `build_filename()`，因此命令行版与界面版**结果逐字节一致**，不会各修各的。
+- 功能：目录选择、扫描预览（带状态色标）、逐行勾选 / 全选 / 反选、右键手动修正、导出 CSV、一键撤销（`rename_history/` 记录）、`Ctrl+O` / `F5` / `Ctrl+Enter` 快捷键、高 DPI 适配。
+- 自带三份测试：`tests/test_engine.py`（引擎层：扫描 / 执行 / 撤销 / 幂等）、`tests/test_gui.py`（界面层冒烟）、`tests/test_layout.py`（布局几何审计，无桌面环境也能捕捉裁切/溢出回归）。
+- 可打包为 `--windowed` 单文件 EXE，并支持 `--selftest report.txt` 无界面自检。
+
 ### 验证
 
 - `python tests/test_extract_info.py` → 24/24 通过。
+- `python tests/test_engine.py` / `tests/test_gui.py` / `tests/test_layout.py` → 全部通过（界面与布局测试会临时屏蔽弹窗，可无人值守运行）。
 - 打包后的 EXE 真机实测（stdout 为管道、未设 `PYTHONIOENCODING`，与自动化环境一致）：
   - 点分名 → `Now That I Can Control Reality With A Mouse Cursor Im Gonna Click Away On The Girls - S01E01 - ToonsHub.mkv` ✅
   - 同目录再放一个 `random_video.mp4`（不可识别）→ 程序正常跑完，打印 `[!] 跳过无法识别的文件：2 个`，改名成功 ✅

@@ -9,6 +9,9 @@ build/
 dist/
 *.spec
 
+# 图形界面版生成的撤销记录
+rename_history/
+
 # 系统临时文件
 Thumbs.db
 .DS_Store
