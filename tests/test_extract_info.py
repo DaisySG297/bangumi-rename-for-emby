@@ -35,6 +35,17 @@ CASES = [
     # ---- 4. 横杠集数 + 版本号 ----
     ("[字幕组] 番剧名 - 05v2 [1080p][简繁内嵌].mp4",
      ("字幕组", "番剧名", 1, "05", ".mp4")),
+    # ---- 4b. 方括号集数 + 版本号（v1.2 修复：[01v2] 曾不被识别，
+    #          集号被 [AVC-8bit] 里的 "-8" 抢走，标题残留 "01v2AVC"）----
+    ("[Sakurato] Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa"
+     " [01v2][AVC-8bit 1080P AAC][CHS].mp4",
+     ("Sakurato", "Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa",
+      1, "01", ".mp4")),
+    ("[组] 番剧名 [05V2][x264 8bit AAC].mkv",
+     ("组", "番剧名", 1, "05", ".mkv")),
+    # 横杠集数模式不得吞掉技法参数里的「横杠+数字」（8bit / 1080p / x264 等）
+    ("[组] 番剧名 - 07 [AVC-8bit 1080P AAC].mkv",
+     ("组", "番剧名", 1, "07", ".mkv")),
     # ---- 5. 外站英文点分(scene)发布名 ----
     ("Now.That.I.Can.Control.Reality.With.A.Mouse.Cursor.Im.Gonna.Click.Away.On.The.Girls"
      ".S01E01.1080p.UNCENSORED.ADN.WEB-DL.DUAL.AAC2.0.H.264.MSubs-ToonsHub.mkv",

@@ -1,5 +1,37 @@
 # 更新记录
 
+## v1.2 — 2026-10-11
+
+> 下载：[⬇️ Releases 页面](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)
+> ｜ 命令行版 `bangumi-rename-v1.2.exe` ｜ 图形界面版 `bangumi-rename-v1.2-gui.exe`
+> ｜ 仓库留档：[`release/v1.2/番剧批量重命名(字幕版).exe`](release/v1.2/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E5%AD%97%E5%B9%95%E7%89%88).exe)、[`release/v1.2/番剧批量重命名(界面版).exe`](release/v1.2/%E7%95%AA%E5%89%A7%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D(%E7%95%8C%E9%9D%A2%E7%89%88).exe)
+
+### 修复：方括号集数带版本号（`[01v2]`）不被识别，集号被编码参数抢走
+
+**现象**（真实生产事故，2026-10-11）：
+
+```
+[Sakurato] Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa
+           [01v2][AVC-8bit 1080P AAC][CHS].mp4
+→ Hitozukiai ga Nigate na Miboujin no Yukionna-san to Noroi no Yubiwa 01v2AVC - S01E08 - Sakurato.mp4
+```
+
+该集实际是 **E01**（TMDB 该季当时只出到第 1 集），却被命名成 S01E08 入库，Emby 只能挂一个没有元数据的「第 8 集」占位分集；标题里还残留 `01v2AVC`。
+
+**为什么要改这里**：集数识别的优先级是 `SxxExx` > 方括号集数 > 横杠集数。横杠模式本来就支持版本号（`- 05v2`），但方括号模式的正则 `\[(\d+)(?:_\d+)?\]` 只认 `[02]`、`[02_74]`，**不认 `[02v2]`**。于是 `[01v2]` 匹配失败，落到横杠模式 `- (\d+)`，在 `[AVC-8bit 1080P AAC]` 里匹配到 `AVC-8bit` 的 `-8`，把 **8 当成集号**；标题也只截到 `AVC` 为止。`[AVC-8bit]` 是桜都等压制组的高频写法，这个坑随时会再踩。
+
+**改了什么**：
+
+1. 方括号模式支持版本号后缀：`\[(\d+)(?:_\d+)?(?:[vV]\d+)?\]` —— `[01v2]`、`[05V2]` 直接识别，`v2` 只是版本标记不计入集号。
+2. 横杠模式加防误吞保护 `(?![A-Za-z0-9])`：数字后紧跟字母/数字的一律不算集号，`8bit` / `1080p` / `x264` 等技法参数不会再被当成集号；`- 07 [AVC-8bit …]` 仍正确取 07。
+
+### 兼容性与验证
+
+- 旧版能处理的名字结果完全一致，唯一变化是「以前解析错/识别失败的」现在正确了。
+- 解析回归 24 → **27 项**全过（新增：`[01v2]`、`[05V2]`、横杠模式不吞 `8bit`）；引擎 / 界面 / 布局测试全过。
+- 命令行版 EXE 真机冒烟：`[01v2][AVC-8bit…]` → `S01E01` ✅；`- S01E02` 老格式与点分名无回归 ✅；混入不可识别文件退出码 0 ✅。
+- 界面版 EXE `--selftest` 全项 `[PASS]`、退出码 0 ✅。
+
 ## v1.1 — 2026-10-10
 
 > 下载：[⬇️ Releases 页面](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)

@@ -188,10 +188,13 @@ def extract_info(filename: str) -> tuple | None:
         episode = se_pattern.group(2)
         ep_pos = se_pattern.start()
     else:
-        # 模式A：方括号内的数字集数 [02]、[02_74]
-        ep_pattern1 = re.search(r'\[(\d+)(?:_\d+)?\]', rest_content)
-        # 模式B：横杠分隔的集数 - 02、- 05v2
-        ep_pattern2 = re.search(r'-\s*(\d+)(?:v\d+)?', rest_content)
+        # 模式A：方括号内的数字集数 [02]、[02_74]、[02v2]（版本号后缀）
+        ep_pattern1 = re.search(r'\[(\d+)(?:_\d+)?(?:[vV]\d+)?\]', rest_content)
+        # 模式B：横杠分隔的集数 - 02、- 05v2。
+        # (?![A-Za-z0-9]) 防止把技法参数里的「横杠+数字」误吞成集号：
+        # 实测事故 [AVC-8bit 1080P AAC] 里的 "-8" 曾被当成 E08（8bit 的 8），
+        # 数字后面紧跟字母/数字的一律不是集号（8bit、1080p、x264 等）。
+        ep_pattern2 = re.search(r'-\s*(\d+)(?:[vV]\d+)?(?![A-Za-z0-9])', rest_content)
 
         if ep_pattern1:
             episode = ep_pattern1.group(1)
