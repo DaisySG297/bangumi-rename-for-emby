@@ -190,11 +190,22 @@ def extract_info(filename: str) -> tuple | None:
     else:
         # 模式A：方括号内的数字集数 [02]、[02_74]、[02v2]（版本号后缀）
         ep_pattern1 = re.search(r'\[(\d+)(?:_\d+)?(?:[vV]\d+)?\]', rest_content)
-        # 模式B：横杠分隔的集数 - 02、- 05v2。
-        # (?![A-Za-z0-9]) 防止把技法参数里的「横杠+数字」误吞成集号：
-        # 实测事故 [AVC-8bit 1080P AAC] 里的 "-8" 曾被当成 E08（8bit 的 8），
-        # 数字后面紧跟字母/数字的一律不是集号（8bit、1080p、x264 等）。
-        ep_pattern2 = re.search(r'-\s*(\d+)(?:[vV]\d+)?(?![A-Za-z0-9])', rest_content)
+        # 模式B：横杠分隔的集数 - 02、- 05v2。两层防误吞：
+        # 1) (?![A-Za-z0-9]) 防技法参数：实测事故 [AVC-8bit 1080P AAC] 的 "-8"
+        #    曾被当成 E08（8bit 的 8），数字后紧跟字母/数字的一律不是集号；
+        # 2) 多个候选时取**最后一个横杠前是空白**的匹配 —— 集号标记总是独立
+        #    成段（" - 03"），标题内的连字编号（U-17、EX-2）横杠紧贴字母不算。
+        #    实测事故（2026-10-15）：新網球王子 U-17 WORLD CUP ... - 03 的
+        #    "-17" 抢在 "- 03" 之前被当成 E17，标题也被截成「新網球王子 U」。
+        #    无独立候选时回退最后一个匹配（兼容 Show-01 这类横杠紧贴的命名）。
+        dash_matches = list(re.finditer(r'-\s*(\d+)(?:[vV]\d+)?(?![A-Za-z0-9])', rest_content))
+        ep_pattern2 = None
+        for _m in reversed(dash_matches):
+            if _m.start() == 0 or rest_content[_m.start() - 1] in ' \t':
+                ep_pattern2 = _m
+                break
+        if ep_pattern2 is None and dash_matches:
+            ep_pattern2 = dash_matches[-1]
 
         if ep_pattern1:
             episode = ep_pattern1.group(1)

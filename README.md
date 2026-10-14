@@ -25,12 +25,12 @@
 
 | 资产（Releases 页） | 对应版本 | 大小 | 适合场景 |
 |---------------------|---------|------|---------|
-| `bangumi-rename-v1.2.exe` | 命令行版 | 约 6.9 MB | 只想快速改一遍，或塞进 qBittorrent / 脚本自动化链路 |
-| `bangumi-rename-v1.2-gui.exe` | **图形界面版** | 约 10.0 MB | 想要可视化预览、逐条勾选、右键修正、一键撤销 |
+| `bangumi-rename-v1.3.exe` | 命令行版 | 约 6.9 MB | 只想快速改一遍，或塞进 qBittorrent / 脚本自动化链路 |
+| `bangumi-rename-v1.3-gui.exe` | **图形界面版** | 约 10.0 MB | 想要可视化预览、逐条勾选、右键修正、一键撤销 |
 
 > GitHub 不支持非 ASCII 资产名，故 Releases 上的资产名是 ASCII；仓库内留档用中文名，**内容完全相同**。
 
-仓库内同时留档：[`release/v1.2/`](release/v1.2/)（`番剧批量重命名(字幕版).exe` + `番剧批量重命名(界面版).exe` + [更新说明](release/v1.2/%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E.md)）｜ 版本改动详见 [更新记录](CHANGELOG.md)
+仓库内同时留档：[`release/v1.3/`](release/v1.3/)（`番剧批量重命名(字幕版).exe` + `番剧批量重命名(界面版).exe` + [更新说明](release/v1.3/%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E.md)）｜ 版本改动详见 [更新记录](CHANGELOG.md)
 
 两版的界面源码亦在仓库中：[`bangumi_rename_gui.py`](bangumi_rename_gui.py)（`python bangumi_rename_gui.py` 直接运行，或自行打包，见 [图形界面版](#-图形界面版)）。
 
@@ -154,7 +154,7 @@ python tests/test_extract_info.py
 
 **方式一：直接用打包好的 EXE（Windows，免装 Python）**
 
-从 [Releases](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest) 取下 `bangumi-rename-v1.2-gui.exe`（即仓库内的 `release/v1.2/番剧批量重命名(界面版).exe`），双击即可，**不会弹出控制台黑框**。
+从 [Releases](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest) 取下 `bangumi-rename-v1.3-gui.exe`（即仓库内的 `release/v1.3/番剧批量重命名(界面版).exe`），双击即可，**不会弹出控制台黑框**。
 
 **方式二：从源码运行**
 
@@ -219,7 +219,7 @@ python bangumi_rename_gui.py
 ```
 bangumi_rename.py        命令行版 + 核心解析逻辑（extract_info / build_filename）
 bangumi_rename_gui.py    图形界面版（引擎层 + tkinter 界面层 + 自绘组件）
-release/v1.2/            发布留档：命令行版 EXE + 界面版 EXE + 更新说明（含 SHA256）
+release/v1.3/            发布留档：命令行版 EXE + 界面版 EXE + 更新说明（含 SHA256）
 tests/test_extract_info.py  解析引擎测试：五类命名格式 + 反例
 tests/test_engine.py     引擎层端到端测试：扫描 / 执行 / 撤销 / 幂等性
 tests/test_gui.py        界面层冒烟测试：控件构建、视觉元素与全链路交互
@@ -254,7 +254,7 @@ pyinstaller --onefile --name "番剧批量重命名(字幕版)" bangumi_rename.p
 
 ### 打包图形界面版
 
-> 不想自己打包？已随版本发布打包好的 `番剧批量重命名(界面版).exe`，见 [`release/v1.2/`](release/v1.2/) 或 [Releases](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)。
+> 不想自己打包？已随版本发布打包好的 `番剧批量重命名(界面版).exe`，见 [`release/v1.3/`](release/v1.3/) 或 [Releases](https://github.com/DaisySG297/bangumi-rename-for-emby/releases/latest)。
 
 **必须使用自带 tkinter 的 Python**（若报 `No module named 'tkinter'`，说明该解释器未编译 GUI 组件，无法打包出可用的界面程序）：
 
@@ -301,6 +301,7 @@ v1.2 发布前已用该方式验证过：`--selftest` 全项 `[PASS]`、退出�
 
 | 版本 | 更新内容 |
 |------|---------|
+| v1.3 | **修复标题内连字编号被当成集号** —— `新網球王子 U-17 WORLD CUP … - 03` 的 `U-17` 抢在 ` - 03` 之前命中（真实事故：E03 被命名成 S01E17、标题截成「新網球王子 U」）。横杠模式现优先取最后一个「横杠前是空白」的独立集号标记；无独立候选时回退最后一个匹配。解析回归 27 → 31 项 |
 | v1.2 | **修复方括号集数带版本号 `[01v2]` 不被识别** —— 集号被 `[AVC-8bit…]` 里的 `-8` 抢走（真实事故：E01 被命名成 S01E08 入库）。方括号模式现支持 `[01v2]`/`[05V2]`；横杠模式加防误吞保护，`8bit`/`1080p`/`x264` 等技法参数不再被当成集号。解析回归 24 → 27 项 |
 | v1.1 | **支持外站英文点分（scene）发布名** —— `标题.S01E02.1080p.WEB-DL.DUAL.AAC2.0.H.264.MSubs-发布组.ext` 由「无法识别」变为可直接重命名：只认点分隔的 `SxxExx` / `Exx` 段（不认纯数字，避免把 264 / 1080 当集号）、末段技法前缀自动剥离、无发布组时省略末段；含中日文/全角/空格的名字仍走原有路径。同时抽出 `build_filename` 统一输出拼接，新增解析引擎测试 `tests/test_extract_info.py`；并修掉「工作区混有无法识别文件时打印 `⚠️` 致 GBK 崩溃、确认后一个文件都没改」的问题。**首次提供图形界面版** `bangumi_rename_gui.py`（含三份界面/引擎/布局测试），并随版本发布打包好的免安装 EXE `番剧批量重命名(界面版).exe` |
 | v1.0 | 首个版本 —— 方括号集数 / 横杠集数 / SxxExx 三类命名，递归遍历、预览确认、重名保护、字幕同步、可打包 EXE |

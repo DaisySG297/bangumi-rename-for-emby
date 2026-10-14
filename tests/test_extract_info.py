@@ -46,6 +46,18 @@ CASES = [
     # 横杠集数模式不得吞掉技法参数里的「横杠+数字」（8bit / 1080p / x264 等）
     ("[组] 番剧名 - 07 [AVC-8bit 1080P AAC].mkv",
      ("组", "番剧名", 1, "07", ".mkv")),
+    # ---- 4c. 多个横杠候选时取最后一个独立集号标记（v1.3 修复：标题内
+    #          连字编号 U-17 的 "-17" 曾抢在 " - 03" 之前被当成集号，
+    #          标题也被截成「新網球王子 U」）----
+    ("[ANi] 新網球王子 U-17 WORLD CUP 世界盃決賽成員決定戰 - 03 [1080P][Baha][WEB-DL][AAC AVC][CHT].mp4",
+     ("ANi", "新網球王子 U-17 WORLD CUP 世界盃決賽成員決定戰", 1, "03", ".mp4")),
+    ("[ANi] 重生者的魔法一定要特别 第二季 - 14 [1080P][Baha][WEB-DL][AAC AVC][CHT][MP4].mp4",
+     ("ANi", "重生者的魔法一定要特别 第二季", 1, "14", ".mp4")),
+    ("[组] Show X-2 - 05 [1080p].mkv",
+     ("组", "Show X-2", 1, "05", ".mkv")),
+    # 无独立横杠候选时回退最后一个匹配（兼容横杠紧贴的命名）
+    ("[组] Show-01 [1080p].mkv",
+     ("组", "Show", 1, "01", ".mkv")),
     # ---- 5. 外站英文点分(scene)发布名 ----
     ("Now.That.I.Can.Control.Reality.With.A.Mouse.Cursor.Im.Gonna.Click.Away.On.The.Girls"
      ".S01E01.1080p.UNCENSORED.ADN.WEB-DL.DUAL.AAC2.0.H.264.MSubs-ToonsHub.mkv",
